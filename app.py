@@ -29,8 +29,8 @@ if uploaded_file is not None:
         documents = loader.load()
 
         splitter = RecursiveCharacterTextSplitter(
-            chunk_size=500,
-            chunk_overlap=50
+            chunk_size=800,
+            chunk_overlap=100
         )
         chunks = splitter.split_documents(documents)
 
@@ -40,7 +40,7 @@ if uploaded_file is not None:
 
         llm = ChatOllama(model="llama3", temperature=0)
 
-        retriever = db.as_retriever(search_kwargs={"k": 3})
+        retriever = db.as_retriever(search_kwargs={"k": 5})
 
         qa_chain = RetrievalQA.from_chain_type(
             llm= llm,
